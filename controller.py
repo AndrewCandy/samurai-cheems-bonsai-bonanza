@@ -9,6 +9,7 @@ import pymunk
 import pymunk.pygame_util
 from pymunk import Vec2d
 from board import Board
+import random
 
 class Controller(ABC):
     """
@@ -67,7 +68,7 @@ class MouseController(Controller):
         _pos = 300, 20
         body.position = _pos
         mouse_dist = ((mouse_pos[0] - _pos[0])**2+(mouse_pos[1] - _pos[1])**2) ** 0.5
-        vel_mag = 500
+        vel_mag = 500 + random.randint(0,50)
         vel = vel_mag*(mouse_pos[0] - _pos[0])/mouse_dist, vel_mag*(mouse_pos[1] - _pos[1])/mouse_dist
         body.velocity = vel
         shape = pymunk.Circle(body, radius, (0, 0))
