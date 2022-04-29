@@ -36,19 +36,30 @@ def main():
 
     game.draw_background()
     game.draw_level(1,1)
-    while game_controller._running:
-            # Progress time forward
-            for x in range(game._physics_steps_per_frame):
-                game._space.step(game._dt)
+    if game.score < 2:
+        game.empty_level()
+        game.draw_level(1,1)
+        run(game, game_view, game_controller, 2)
+    if game.score < 10:
+        game.empty_level()
+        game.draw_level(1,2)
+        run(game, game_view, game_controller, 10)
+    print("You Win!")
 
-            game_controller._process_events()
-            game.check_if_scored()
-            game_view.clear_screen()
-            game_view.draw_objects()
-            pygame.display.flip()
-            # Delay fixed time between frames
-            game._clock.tick(50)
-            pygame.display.set_caption(f"Your score is {game.score}!")
+def run(game, game_view, game_controller, score_breakpoint):
+    while game_controller._running and game.score < score_breakpoint:
+        # Progress time forward
+        for x in range(game._physics_steps_per_frame):
+            game._space.step(game._dt)
+
+        game_controller._process_events()
+        game.check_if_scored()
+        game_view.clear_screen()
+        game_view.draw_objects()
+        pygame.display.flip()
+        # Delay fixed time between frames
+        game._clock.tick(50)
+        pygame.display.set_caption(f"Your score is {game.score}!")
 
 if __name__ == "__main__":
     main()

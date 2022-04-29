@@ -61,6 +61,7 @@ class Board(object):
         self._space.add(*wall_lines)
 
     def draw_level(self,level_num, level_state):
+        self.empty_level()
         static_body = self._space.static_body
         pip_radius=5
 
@@ -76,9 +77,20 @@ class Board(object):
         ]
         tree_lines_1_1 = []
 
+        pips_1_2 = []
+        for row in range(4):
+            for col in range(10):
+                pips_1_2.append(pymunk.Circle(static_body,pip_radius,(col*70+35*(row % 2),row*120+100)))
+
         if level_num == 1:
             if level_state == 1:
                 self.pips = pips_1_1
+                self.tree_lines = tree_lines_1_1
+                self.pot_lines = pot_lines_1_1
+                self.pot_x_1 = 200
+                self.pot_x_2 = 400
+            if level_state == 2:
+                self.pips = pips_1_2
                 self.tree_lines = tree_lines_1_1
                 self.pot_lines = pot_lines_1_1
                 self.pot_x_1 = 200
@@ -100,16 +112,13 @@ class Board(object):
 
     def empty_level(self):
         self._space.remove(*self.pips)
-        for pip in self.pips:
-            self.pips.remove(pip)
+        self.pips = []
         
         self._space.remove(*self.tree_lines)
-        for line in self.tree_lines:
-            self.tree_lines.remove(line)
+        self.tree_lines = []
         
         self._space.remove(*self.pot_lines)
-        for line in self.pot_lines:
-            self.pot_lines.remove(line)
+        self.pot_lines = []
     
     def check_if_scored(self):
         """
@@ -122,7 +131,7 @@ class Board(object):
             self._space.remove(ball, ball.body)
             self._balls.remove(ball)
             self.score += 1
-            print(f"Your score is {self.score}!")
+
         # Remove balls that fall out of bounds
         balls_to_remove = [ball for ball in self._balls if ball.body.position.y > 590]
         for ball in balls_to_remove:
