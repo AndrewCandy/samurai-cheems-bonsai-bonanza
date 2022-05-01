@@ -60,16 +60,21 @@ class DefaultView(View):
     """
 
     def get_static_lines(self):
+        """
+        Combines all lines from _board into one list.
+
+        Returns:
+            A list of static line objects from _board.
+        """
         static_lines = []
         static_lines.extend(self._board.pot_lines)
         static_lines.extend(self._board.tree_lines)
         static_lines.extend(self._board.wall_lines)
         return static_lines
 
-    def draw_objects(self):
+    def draw_balls(self):
         """
-        Draw the objects in default view.
-        :return: None
+        Draws all balls from _board to _screen.
         """
         for ball in self._board.balls:
             # image draw
@@ -85,6 +90,10 @@ class DefaultView(View):
 
             self._screen.blit(rotated_logo_img, (round(p.x), round(p.y)))
 
+    def draw_pips(self):
+        """
+        Draws all pips from _board to _screen.
+        """
         for pip in self._board.pips:
             p = pip.offset
             p = Vec2d(p[0], flipy(p[1]))
@@ -94,6 +103,10 @@ class DefaultView(View):
             #print(f"Pip pos: {p}")
             self._screen.blit(self._pip_img, (round(p.x), round(p.y)))
 
+    def draw_static_lines(self):
+        """
+        Draws all lines from _board to _screen.
+        """
         static_lines = self.get_static_lines()
         for line in static_lines:
             body = line.body
@@ -104,5 +117,14 @@ class DefaultView(View):
             p2 = round(pv2.x), round(flipy(pv2.y))
             pygame.draw.lines(self._screen, pygame.Color("lightgray"), False, [p1, p2], 2)
 
+
+    def draw_objects(self):
+        """
+        Draw all objects to pygame screen. Update window with screen.
+        :return: None
+        """
+        self.draw_balls()
+        self.draw_pips()
+        self.draw_static_lines()
         self._window.blit(pygame.transform.scale(self._screen, self._window.get_rect().size), (0, 0))
         pygame.display.update()
