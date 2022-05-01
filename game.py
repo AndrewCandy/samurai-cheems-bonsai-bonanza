@@ -56,7 +56,6 @@ def run(game, game_view, game_controller, score_breakpoint):
         game_view.clear_screen()
         #Draws the active screen objects
         game_view.draw_objects()
-        pygame.display.flip()
 
         # Delay fixed time between frames
         game._clock.tick(50)

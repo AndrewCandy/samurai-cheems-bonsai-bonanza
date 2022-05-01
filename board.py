@@ -7,10 +7,10 @@ from typing import List
 
 # Library imports
 import pygame
-
 # pymunk imports
 import pymunk
 import pymunk.pygame_util
+from pymunk import Vec2d
 
 
 class Board():
@@ -21,6 +21,7 @@ class Board():
     def __init__(self):
         self.pot_lines = []
         self.tree_lines = []
+        self.wall_lines = []
         self.pips = []
         self.pot_x_1 = 0
         self.pot_x_2 = 0
@@ -37,7 +38,7 @@ class Board():
 
         # pygame
         pygame.init()
-        self._screen = pygame.display.set_mode((600, 600))
+        #self._screen = pygame.display.set_mode((600, 600))
         self._clock = pygame.time.Clock()
 
 
@@ -54,17 +55,17 @@ class Board():
         #Makes the physics body static
         static_body = self._space.static_body
         #Creates the locations of the wall lines
-        wall_lines = [
+        self.wall_lines = [
             pymunk.Segment(static_body, (0, 0), (0, 600), 0.0),
             pymunk.Segment(static_body, (600, 0), (600, 600), 0.0),
             pymunk.Segment(static_body, (0, 0), (600, 0), 0.0)
         ]
         #Adds physics parameters for the lines
-        for line in wall_lines:
+        for line in self.wall_lines:
             line.elasticity = 0.5
             line.friction = 0.9
         #Adds the wall lines to the space.
-        self._space.add(*wall_lines)
+        self._space.add(*self.wall_lines)
 
     def draw_level(self,level_num, level_state):
         """
@@ -83,6 +84,7 @@ class Board():
             for col in range(10):
                 pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
                     (col*70+35*(row % 2),row*70+100)))
+
         pot_lines_1_1 = [
             pymunk.Segment(static_body, (200, 600 - 10), (400, 600 - 10), 0.0),\
             pymunk.Segment(static_body, (200.0, 600 - 10), (150.0, 600 - 60), 0.0),\
@@ -113,6 +115,7 @@ class Board():
         #Adds the physics for each object and
         #adds the object to the physics space
         for pip in self.pips:
+            print(pip.offset)
             pip.elasticity = 0.95
             pip.friction = 0.9
         self._space.add(*self.pips)
