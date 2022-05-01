@@ -1,43 +1,50 @@
+"""
+Creates the view of the Samurai Cheems: Bonsai Bananza game
+"""
 # Library imports
-import pygame
 from abc import ABC, abstractmethod
-
+import pygame
+import pymunk.pygame_util
 
 class View(ABC):
     """
-    Create an abstract class to hold view methods for tic tac toe.
+    Create an abstract class to hold view methods
+    for Samurai Cheems: Bonsai Bonanza.
     """
     # Define your methods here.
 
     def __init__(self,board):
+        """
+        Initializes the View class
+        """
         self._board=board
-    
-    def clear_screen(self) -> None:
+        self._board._draw_options = pymunk.pygame_util.DrawOptions(self._board._screen)
+
+    def clear_screen(self):
         """
         Clears the screen.
-        :return: None
+        return: None
         """
         self._board._screen.fill(pygame.Color("white"))
 
     @abstractmethod
     def draw_objects(self):
         """
-        Creates an abstract draw method
+        Creates an abstract method to draw objects
         """
 
 
 class DefaultView(View):
     """
-    A text based Tic-tac-toe view method to represent the state of the
-    tic-tac-toe board as a string.
+    The pymunk default view of representing objects.
 
     Attributes:
         None
     """
 
-    def draw_objects(self) -> None:
+    def draw_objects(self):
         """
-        Draw the objects.
+        Draw the objects in default view.
         :return: None
         """
         self._board._space.debug_draw(self._board._draw_options)
