@@ -11,6 +11,8 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 
+from board import Board
+
 class Controller(ABC):
     """
     Create an abstract class to hold view methods for tic tac toe.
@@ -33,6 +35,10 @@ class Controller(ABC):
             #Quits if the escape button is pressed
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 self.running = False
+            #Clears level for debugging purposes
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self._board._space.remove(*self._board.pips)
+                self._board.pips = []
             #Launches a new ball when clicked
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 mouse_xy = event.pos[0], event.pos[1]
