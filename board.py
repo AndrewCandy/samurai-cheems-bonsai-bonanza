@@ -80,10 +80,10 @@ class Board():
 
         #Sets object locations for level 1 stage 1
         pips_1_1 = []
-        #for row in range(6):
-        #    for col in range(10):
-        #        pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
-        #            (col*70+35*(row % 2),row*70+100)))
+        for row in range(6):
+            for col in range(10):
+                pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
+                    (col*70+35*(row % 2),row*70+100)))
 
         pot_lines_1_1 = [
             pymunk.Segment(static_body, (200, 600 - 10), (400, 600 - 10), 0.0),\
@@ -125,7 +125,7 @@ class Board():
         for line in self.pot_lines:
             line.elasticity = 0.5
             line.friction = 0.9
-            line.collision_type = 2
+        self.pot_lines[0].collision_type = 2
         self._space.add(*self.pot_lines)
 
     def empty_level(self):
