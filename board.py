@@ -4,7 +4,6 @@ Creates the model behind the Samurai Cheems: Bonsai Bananza game
 
 # Python imports
 from typing import List
-import time
 
 # Library imports
 import pygame
@@ -154,8 +153,6 @@ class Board():
         if len(self.balls) > 0:
             ball = self.balls[0]
             score_collision.begin = self.scores
-            time.sleep(0.01)
-            #ball.collision_type = 3
 
         # Remove balls that fall out of bounds
         balls_to_remove = [ball for ball in self.balls if ball.body.position.y > 590]
@@ -164,7 +161,7 @@ class Board():
             self.balls.remove(ball)
 
     def scores(self,arbiter,space,data):
+        self._space.remove(*self.balls)
+        self.balls = []
         self.score += 1
-        self._space.remove(self.balls, self.balls.body)
-        self.balls.remove(self.balls)
         return True
