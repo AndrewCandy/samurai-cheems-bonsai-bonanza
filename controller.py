@@ -91,6 +91,7 @@ class MouseController(Controller):
         shape = pymunk.Circle(body, radius, (0, 0))
         shape.elasticity = 0.95
         shape.friction = 0.9
+        shape.collision_type = 1
 
         #Adds the ball to the space and to the list of balls
         self._board._space.add(body,shape)

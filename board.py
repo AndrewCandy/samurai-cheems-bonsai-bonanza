@@ -4,6 +4,7 @@ Creates the model behind the Samurai Cheems: Bonsai Bananza game
 
 # Python imports
 from typing import List
+import time
 
 # Library imports
 import pygame
@@ -43,8 +44,7 @@ class Board():
 
 
         # Balls that exist in the world
-        self.balls: List[pymunk.Circle] = []
-
+        self.balls = []
 
         self.score = 0
 
@@ -80,10 +80,10 @@ class Board():
 
         #Sets object locations for level 1 stage 1
         pips_1_1 = []
-        for row in range(6):
-            for col in range(10):
-                pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
-                    (col*70+35*(row % 2),row*70+100)))
+        #for row in range(6):
+        #    for col in range(10):
+        #        pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
+        #            (col*70+35*(row % 2),row*70+100)))
 
         pot_lines_1_1 = [
             pymunk.Segment(static_body, (200, 600 - 10), (400, 600 - 10), 0.0),\
@@ -115,7 +115,6 @@ class Board():
         #Adds the physics for each object and
         #adds the object to the physics space
         for pip in self.pips:
-            print(pip.offset)
             pip.elasticity = 0.95
             pip.friction = 0.9
         self._space.add(*self.pips)
@@ -126,6 +125,7 @@ class Board():
         for line in self.pot_lines:
             line.elasticity = 0.5
             line.friction = 0.9
+            line.collision_type = 2
         self._space.add(*self.pot_lines)
 
     def empty_level(self):
@@ -150,16 +150,21 @@ class Board():
         :return: None
         """
         # Remove balls that fall into bonsai pot and increase score
-        balls_to_remove = [ball for ball in self.balls if \
-            ball.body.position.y > 550 and self.pot_x_1 < \
-            ball.body.position.x < self.pot_x_2]
-        for ball in balls_to_remove:
-            self._space.remove(ball, ball.body)
-            self.balls.remove(ball)
-            self.score += 1
+        score_collision = self._space.add_collision_handler(1,2)
+        if len(self.balls) > 0:
+            ball = self.balls[0]
+            score_collision.begin = self.scores
+            time.sleep(0.01)
+            #ball.collision_type = 3
 
         # Remove balls that fall out of bounds
         balls_to_remove = [ball for ball in self.balls if ball.body.position.y > 590]
         for ball in balls_to_remove:
             self._space.remove(ball, ball.body)
             self.balls.remove(ball)
+
+    def scores(self,arbiter,space,data):
+        self.score += 1
+        self._space.remove(self.balls, self.balls.body)
+        self.balls.remove(self.balls)
+        return True

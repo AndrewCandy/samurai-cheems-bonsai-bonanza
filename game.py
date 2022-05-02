@@ -33,9 +33,10 @@ def main():
             #Draws the upcoming level
             game.draw_level(level+1,stage+1)
             #Runs the game for that level
-            run(game, game_view, game_controller, 3*(stage+1)+level*num_stages)
-
-    print("You Win!")
+            score_to_beat = 3*(stage+1)+level*num_stages
+            run(game, game_view, game_controller, score_to_beat)
+    if game.score == score_to_beat:
+        print("You Win!")
 
 def run(game, game_view, game_controller, score_breakpoint):
     """
