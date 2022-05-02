@@ -26,7 +26,7 @@ class View(ABC):
         #self._board._draw_options = pymunk.pygame_util.DrawOptions(self._board._screen)
 
         # Window Scaling
-        self._scaling_factor = 1
+        self._scaling_factor = 2
         self._screen_size = 600
         self._window_size = self._screen_size * self._scaling_factor
 
@@ -77,18 +77,21 @@ class DefaultView(View):
         Draws all balls from _board to _screen.
         """
         for ball in self._board.balls:
-            # image draw
             p = ball.body.position
             p = Vec2d(p.x, flipy(p.y))
 
+            img = self._ball_img
+            ball_diam = ball.radius * 2
+
+            rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
             # we need to rotate 180 degrees because of the y coordinate flip
             angle_degrees = math.degrees(ball.body.angle) + 180
-            rotated_logo_img = pygame.transform.rotate(self._ball_img, angle_degrees)
+            rotated_img = pygame.transform.rotate(rescaled_img, angle_degrees)
 
-            offset = Vec2d(*rotated_logo_img.get_size()) / 2
+            offset = Vec2d(*rotated_img.get_size()) / 2
             p = p - offset
 
-            self._screen.blit(rotated_logo_img, (round(p.x), round(p.y)))
+            self._screen.blit(rotated_img, (round(p.x), round(p.y)))
 
     def draw_pips(self):
         """
@@ -98,10 +101,15 @@ class DefaultView(View):
             p = pip.offset
             p = Vec2d(p[0], flipy(p[1]))
 
-            offset = Vec2d(*self._pip_img.get_size()) / 2
+            img = self._pip_img
+            ball_diam = pip.radius * 2
+            rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
+
+
+            offset = Vec2d(*rescaled_img.get_size()) / 2
             p = p - offset
             #print(f"Pip pos: {p}")
-            self._screen.blit(self._pip_img, (round(p.x), round(p.y)))
+            self._screen.blit(rescaled_img, (round(p.x), round(p.y)))
 
     def draw_static_lines(self):
         """
