@@ -11,7 +11,7 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 from pymunk import Vec2d
-
+from levels import LevelSetup
 
 class Board():
     """
@@ -25,6 +25,8 @@ class Board():
         self.pips = []
         self.pot_x_1 = 0
         self.pot_x_2 = 0
+
+        self.setup = LevelSetup()
 
         # Space
         self._space = pymunk.Space()
@@ -77,39 +79,20 @@ class Board():
 
         pip_radius=5
 
-        #Sets object locations for level 1 stage 1
-        pips_1_1 = []
-        for row in range(6):
-            for col in range(10):
-                pips_1_1.append(pymunk.Circle(static_body,pip_radius,\
-                    (col*70+35*(row % 2),row*70+100)))
+        level_layout = self.setup.load_level(level_num,level_state)
 
-        pot_lines_1_1 = [
-            pymunk.Segment(static_body, (200, 600 - 10), (400, 600 - 10), 0.0),\
-            pymunk.Segment(static_body, (200.0, 600 - 10), (150.0, 600 - 60), 0.0),\
-            pymunk.Segment(static_body, (400.0, 600 - 10), (450.0, 600 - 60), 0.0)]
-        tree_lines_1_1 = []
+        pip_layout = level_layout[0]
+        for pip in pip_layout:
+            self.pips.append(pymunk.Circle(static_body,pip_radius,\
+                    pip))
+        
+        tree_layout = level_layout[1]
+        for line in tree_layout:
+            self.tree_lines.append(pymunk.Segment(static_body, line[0],line[1], 0.0))
 
-        pips_1_2 = []
-        for row in range(4):
-            for col in range(10):
-                pips_1_2.append(pymunk.Circle(static_body,pip_radius,(col*70+\
-                    35*(row % 2),row*120+100)))
-
-        #Sets the parameters for each level and stage
-        if level_num == 1:
-            if level_state == 1:
-                self.pips = pips_1_1
-                self.tree_lines = tree_lines_1_1
-                self.pot_lines = pot_lines_1_1
-                self.pot_x_1 = 200
-                self.pot_x_2 = 400
-            if level_state == 2:
-                self.pips = pips_1_2
-                self.tree_lines = tree_lines_1_1
-                self.pot_lines = pot_lines_1_1
-                self.pot_x_1 = 200
-                self.pot_x_2 = 400
+        pot_layout = level_layout[2]
+        for line in pot_layout:
+            self.pot_lines.append(pymunk.Segment(static_body, line[0],line[1], 0.0))
 
         #Adds the physics for each object and
         #adds the object to the physics space
