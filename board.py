@@ -57,9 +57,10 @@ class Board():
         static_body = self._space.static_body
         #Creates the locations of the wall lines
         self.wall_lines = [
-            pymunk.Segment(static_body, (0, 0), (0, 600), 0.0),
-            pymunk.Segment(static_body, (600, 0), (600, 600), 0.0),
-            pymunk.Segment(static_body, (0, 0), (600, 0), 0.0)
+            #Left Line
+            pymunk.Segment(static_body, (240, 0), (240, 768), 0.0),
+            pymunk.Segment(static_body, (768, 0), (768, 768), 0.0),
+            pymunk.Segment(static_body, (240, 0), (768, 0), 0.0)
         ]
         #Adds physics parameters for the lines
         for line in self.wall_lines:
@@ -138,7 +139,7 @@ class Board():
             score_collision.begin = self.scores
 
         # Remove balls that fall out of bounds
-        balls_to_remove = [ball for ball in self.balls if ball.body.position.y > 590]
+        balls_to_remove = [ball for ball in self.balls if ball.body.position.y > 672-10]
         for ball in balls_to_remove:
             self._space.remove(ball, ball.body)
             self.balls.remove(ball)

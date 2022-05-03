@@ -76,7 +76,7 @@ class MouseController(Controller):
         body = pymunk.Body(mass, inertia)
 
         #Set launch position
-        _pos = 300, 20
+        _pos = (240+768)/2, 20
         body.position = _pos
 
         #Finds the distance from the mouse to the launch position when clicked

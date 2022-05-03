@@ -26,13 +26,15 @@ class View(ABC):
         #self._board._draw_options = pymunk.pygame_util.DrawOptions(self._board._screen)
 
         # Window Scaling
-        self._scaling_factor = 2
-        self._screen_size = 600
-        self._window_size = self._screen_size * self._scaling_factor
+        self._scaling_factor = 1
+        self._screen_size_x = 768
+        self._screen_size_y = 672
+        self._window_size_x = self._screen_size_x * self._scaling_factor
+        self._window_size_y = self._screen_size_y * self._scaling_factor
 
         # pygame
-        self._screen = pygame.Surface((self._screen_size, self._screen_size))
-        self._window = pygame.display.set_mode((self._window_size, self._window_size))
+        self._screen = pygame.Surface((self._screen_size_x, self._screen_size_y))
+        self._window = pygame.display.set_mode((self._window_size_x, self._window_size_y))
 
         self._ball_img = pygame.image.load("test.png")
         self._pip_img = pygame.image.load("test.png")
