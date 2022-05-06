@@ -47,7 +47,12 @@ class Board():
         # Balls that exist in the world
         self.balls = []
 
+        # Ball types:
+        # 0 = water, 1 = earth, 2 = sun
+        self.current_ball_type = 0
+
         self.score = 0
+        self._scores = [0,0,0]
 
     def draw_background(self):
         """
@@ -127,6 +132,20 @@ class Board():
         self._space.remove(*self.pot_lines)
         self.pot_lines = []
 
+    def next_ball(self):
+        """
+        
+        """
+        next_ball = self.current_ball_type + 1
+        if next_ball > 2:
+            next_ball = 0
+        return next_ball
+
+    def get_scores(self):
+        """
+        """
+        return self._scores
+
     def check_if_scored(self):
         """
         Create/remove balls as necessary. Call once per frame only.
@@ -137,15 +156,19 @@ class Board():
         if len(self.balls) > 0:
             ball = self.balls[0]
             score_collision.begin = self.scores
+            
 
         # Remove balls that fall out of bounds
         balls_to_remove = [ball for ball in self.balls if ball.body.position.y > 672-10]
         for ball in balls_to_remove:
             self._space.remove(ball, ball.body)
             self.balls.remove(ball)
+            self.current_ball_type = self.next_ball()
 
     def scores(self,arbiter,space,data):
         self._space.remove(*self.balls)
         self.balls = []
         self.score += 1
+        self._scores[self.current_ball_type] += 1
+        self.current_ball_type = self.next_ball()
         return True

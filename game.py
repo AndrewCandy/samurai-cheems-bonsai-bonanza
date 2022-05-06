@@ -62,7 +62,7 @@ def run(game, game_view, game_controller, score_breakpoint):
         game._clock.tick(50)
 
         #Set window title
-        pygame.display.set_caption(f"Your score is {game.score}!")
+        pygame.display.set_caption(f"Your score is {game.get_scores()}!")
 
 if __name__ == "__main__":
     main()

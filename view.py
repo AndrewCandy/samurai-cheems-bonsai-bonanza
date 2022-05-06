@@ -41,7 +41,7 @@ class View(ABC):
         self._ball_sprite_sheet = SpriteSheet("sprites/balls_sprite_sheet.png")
         self._pip_sprite_sheet = SpriteSheet("sprites/peg_sprite_sheet.png")
 
-        self._ball_img = self._ball_sprite_sheet.image_at((9,0,9,9), -1)
+        self._ball_images = self._ball_sprite_sheet.load_strip((0,0,9,9), 3, -1)
         self._pip_img = self._pip_sprite_sheet.image_at((8,0,8,8), -1)
 
         self._background = pygame.image.load("sprites/temp_background.png")
@@ -90,7 +90,7 @@ class DefaultView(View):
             p = ball.body.position
             p = Vec2d(p.x, flipy(p.y))
 
-            img = self._ball_img
+            img = self._ball_images[self._board.current_ball_type]
             ball_diam = ball.radius * 2
 
             rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
