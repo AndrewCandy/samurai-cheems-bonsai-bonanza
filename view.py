@@ -44,12 +44,15 @@ class View(ABC):
         self._ball_img = self._ball_sprite_sheet.image_at((9,0,9,9), -1)
         self._pip_img = self._pip_sprite_sheet.image_at((8,0,8,8), -1)
 
+        self._background = pygame.image.load("sprites/temp_background.png")
+
     def clear_screen(self):
         """
         Clears the screen.
         return: None
         """
-        self._screen.fill(pygame.Color("white"))
+        background = pygame.transform.scale(self._background, (self._screen_size_x, self._screen_size_y))
+        self._screen.blit(background, (0,0))
 
     @abstractmethod
     def draw_objects(self):
