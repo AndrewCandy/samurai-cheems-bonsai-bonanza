@@ -5,6 +5,7 @@ Creates the view of the Samurai Cheems: Bonsai Bananza game
 from abc import ABC, abstractmethod
 import math
 import pygame
+from sprite_sheet import SpriteSheet
 import pymunk.pygame_util
 from pymunk import Vec2d
 
@@ -36,8 +37,12 @@ class View(ABC):
         self._screen = pygame.Surface((self._screen_size_x, self._screen_size_y))
         self._window = pygame.display.set_mode((self._window_size_x, self._window_size_y))
 
-        self._ball_img = pygame.image.load("test.png")
-        self._pip_img = pygame.image.load("test.png")
+        #sprite setup
+        self._ball_sprite_sheet = SpriteSheet("sprites/balls_sprite_sheet.png")
+        self._pip_sprite_sheet = SpriteSheet("sprites/peg_sprite_sheet.png")
+
+        self._ball_img = self._ball_sprite_sheet.image_at((9,0,9,9), -1)
+        self._pip_img = self._pip_sprite_sheet.image_at((8,0,8,8), -1)
 
     def clear_screen(self):
         """
@@ -87,7 +92,7 @@ class DefaultView(View):
 
             rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
             # we need to rotate 180 degrees because of the y coordinate flip
-            angle_degrees = math.degrees(ball.body.angle) + 180
+            angle_degrees = math.degrees(ball.body.angle)
             rotated_img = pygame.transform.rotate(rescaled_img, angle_degrees)
 
             offset = Vec2d(*rotated_img.get_size()) / 2

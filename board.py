@@ -78,7 +78,7 @@ class Board():
         #Sets the physics type for the level objects
         static_body = self._space.static_body
 
-        pip_radius=5
+        pip_radius=8
 
         level_layout = self.setup.load_level(level_num,level_state)
 
