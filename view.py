@@ -40,9 +40,11 @@ class View(ABC):
         #sprite setup
         self._ball_sprite_sheet = SpriteSheet("sprites/balls_sprite_sheet.png")
         self._pip_sprite_sheet = SpriteSheet("sprites/peg_sprite_sheet.png")
+        self._bonsai_sprite_sheet = SpriteSheet("sprites/cherry_bonsai_sprite_sheet.png")
 
         self._ball_images = self._ball_sprite_sheet.load_strip((0,0,9,9), 3, -1)
         self._pip_img = self._pip_sprite_sheet.image_at((8,0,8,8), -1)
+        self._bonsai_images = self._bonsai_sprite_sheet.load_strip((0,0,264,336), 4, -1)
 
         self._background = pygame.image.load("sprites/temp_background.png")
 
@@ -135,13 +137,35 @@ class DefaultView(View):
             p2 = round(pv2.x), round(flipy(pv2.y))
             pygame.draw.lines(self._screen, pygame.Color("lightgray"), False, [p1, p2], 2)
 
+    def draw_bonsai(self):
+        """
+        
+        """
+        scores = self._board.get_scores()
+        if 0 in scores:
+            stage = 1
+        elif 1 in scores:
+            stage = 2
+        else:
+            stage = 3
+        
+        rescaled_img = pygame.transform.scale(self._bonsai_images[stage], (528, 672))
+        self._screen.blit(rescaled_img, (240,0))
+
+    def draw_pot(self):
+        """
+        """
+        rescaled_img = pygame.transform.scale(self._bonsai_images[0], (528, 672))
+        self._screen.blit(rescaled_img, (240,0))
 
     def draw_objects(self):
         """
         Draw all objects to pygame screen. Update window with screen.
         :return: None
         """
+        self.draw_bonsai()
         self.draw_balls()
+        self.draw_pot()
         self.draw_pips()
         self.draw_static_lines()
         self._window.blit(pygame.transform.scale(self._screen, self._window.get_rect().size), (0, 0))

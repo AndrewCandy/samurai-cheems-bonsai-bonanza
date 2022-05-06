@@ -31,7 +31,7 @@ def main():
     # Uses the number of levels and number of stages per level to
     # Iterate through each stage of the game
     num_levels = 1
-    num_stages = 2
+    num_stages = 3
 
     # Iterates for each level and stage
     for level in range(num_levels):
@@ -39,19 +39,18 @@ def main():
             # Draws the upcoming level
             game.draw_level(level+1, stage+1)
             # Runs the game for that level
-            score_to_beat = 3*(stage+1)+level*num_stages
-            run(game, game_view, game_controller, score_to_beat)
-    if game.score == score_to_beat:
-        print("You Win!")
+            run(game, game_view, game_controller, stage)
+
+    print("You Win!")
 
 
-def run(game, game_view, game_controller, score_breakpoint):
+def run(game, game_view, game_controller, stage):
     """
     Runs through the main gameplay loop for each level
     """
     # Ends this level if the game ends or if the game is closed or the score
     # is high enough
-    while game_controller.running and game.score < score_breakpoint:
+    while game_controller.running and stage in game.get_scores():
         # Progress time forward
         for x in range(game.physics_steps_per_frame):
             game._space.step(game.dt)

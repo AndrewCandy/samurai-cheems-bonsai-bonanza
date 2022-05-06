@@ -54,7 +54,6 @@ class Board():
         # 0 = water, 1 = earth, 2 = sun
         self.current_ball_type = 0
 
-        self.score = 0
         self._scores = [0,0,0]
 
     def draw_background(self):
@@ -175,7 +174,6 @@ class Board():
     def scores(self, arbiter, space, data):
         self._space.remove(*self.balls)
         self.balls = []
-        self.score += 1
         self._scores[self.current_ball_type] += 1
         self.current_ball_type = self.next_ball()
         sound.play_score()
