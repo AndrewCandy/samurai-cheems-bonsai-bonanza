@@ -69,7 +69,7 @@ class MouseController(Controller):
         """
         #Physical Parameters of the ball
         mass = 10
-        radius = 9
+        radius = self._board.ball_radius
         inertia = pymunk.moment_for_circle(mass, 0, radius, (0, 0))
 
         #Sends the momentum parameters to the body

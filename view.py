@@ -84,26 +84,62 @@ class DefaultView(View):
         static_lines.extend(self._board.wall_lines)
         return static_lines
 
+    def rescale(self, image, dimensions):
+        """
+        """
+        return pygame.transform.scale(image, dimensions)
+
+    def center_offset(self, image, position):
+        """
+        Offest the position of an image so it is centered on the input position
+        instead of being at the top left corner.
+
+        Args:
+            image: A pygame image.
+            position: A Vec2d of the x and y position of the object.
+
+        returns: 
+            A Vec2d of positions x and y modified to center the image to the
+            input position.
+        """
+        offset = Vec2d(*image.get_size()) / 2
+        return position - offset
+
+    def current_ball_image(self):
+        """
+        """
+        return self._ball_images[self._board.current_ball_type]
+
+    def vec_to_tuple(self, vec):
+        return ((round(vec.x), round(vec.y)))
+
     def draw_balls(self):
         """
         Draws all balls from _board to _screen.
         """
         for ball in self._board.balls:
             p = ball.body.position
-            p = Vec2d(p.x, flipy(p.y))
+            #p = Vec2d(p.x, flipy(p.y))
 
-            img = self._ball_images[self._board.current_ball_type]
+            img = self.current_ball_image()
             ball_diam = ball.radius * 2
 
-            rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
+            rescaled_img = self.rescale(img, (ball_diam, ball_diam))
             # we need to rotate 180 degrees because of the y coordinate flip
             angle_degrees = math.degrees(ball.body.angle)
             rotated_img = pygame.transform.rotate(rescaled_img, angle_degrees)
 
-            offset = Vec2d(*rotated_img.get_size()) / 2
-            p = p - offset
+            p = self.center_offset(rotated_img, p)
 
-            self._screen.blit(rotated_img, (round(p.x), round(p.y)))
+            self._screen.blit(rotated_img, self.vec_to_tuple(p))
+
+    def draw_next_ball(self):
+        if len(self._board.balls) == 0:
+            ball_daim = self._board.ball_radius * 2
+            rescaled_img = self.rescale(self.current_ball_image(), (ball_daim, ball_daim))
+            position = Vec2d((240+768)/2, 20)
+            position = self.center_offset(rescaled_img, position)
+            self._screen.blit(rescaled_img, self.vec_to_tuple(position))
 
     def draw_pips(self):
         """
@@ -167,6 +203,7 @@ class DefaultView(View):
         self.draw_balls()
         self.draw_pot()
         self.draw_pips()
-        self.draw_static_lines()
+        self.draw_next_ball()
+        # self.draw_static_lines()
         self._window.blit(pygame.transform.scale(self._screen, self._window.get_rect().size), (0, 0))
         pygame.display.update()
