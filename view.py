@@ -9,8 +9,6 @@ from sprite_sheet import SpriteSheet
 import pymunk.pygame_util
 from pymunk import Vec2d
 
-def flipy(y):
-    return y
 
 class View(ABC):
     """
@@ -86,6 +84,14 @@ class DefaultView(View):
 
     def rescale(self, image, dimensions):
         """
+        rescales an image to the given dimensions.
+
+        Args:
+            image: A pygame surface object.
+            dimensions: a tuple of the final width and height of the image.
+
+        Returns:
+            A pygame surface object of specified width and height.
         """
         return pygame.transform.scale(image, dimensions)
 
@@ -95,7 +101,7 @@ class DefaultView(View):
         instead of being at the top left corner.
 
         Args:
-            image: A pygame image.
+            image: A pygame surface object.
             position: A Vec2d of the x and y position of the object.
 
         returns: 
@@ -107,10 +113,24 @@ class DefaultView(View):
 
     def current_ball_image(self):
         """
+        Gets the image for the current ball type.
+
+        Returns:
+            the pygame surface containing the image for the current ball.
         """
         return self._ball_images[self._board.current_ball_type]
 
     def vec_to_tuple(self, vec):
+        """
+        Converts a Vec2d type into a tuple rounded to the nearest int for use
+        in blitting. 
+
+        Args:
+            vec: A Vec2d vector from pymunk.
+        
+        Returns:
+            A Tuple of the rounded Vec2d values. Output format is (x, y).
+        """
         return ((round(vec.x), round(vec.y)))
 
     def draw_balls(self):
@@ -136,8 +156,9 @@ class DefaultView(View):
     def draw_next_ball(self):
         if len(self._board.balls) == 0:
             ball_daim = self._board.ball_radius * 2
-            rescaled_img = self.rescale(self.current_ball_image(), (ball_daim, ball_daim))
-            position = Vec2d((240+768)/2, 20)
+            rescaled_img = self.rescale(self.current_ball_image(), \
+                                        (ball_daim, ball_daim))
+            position = Vec2d((240+self._screen_size_x)/2, 20)
             position = self.center_offset(rescaled_img, position)
             self._screen.blit(rescaled_img, self.vec_to_tuple(position))
 
@@ -147,17 +168,14 @@ class DefaultView(View):
         """
         for pip in self._board.pips:
             p = pip.offset
-            p = Vec2d(p[0], flipy(p[1]))
 
             img = self._pip_img
             ball_diam = pip.radius * 2
-            rescaled_img = pygame.transform.scale(img, (ball_diam, ball_diam))
+            rescaled_img = self.rescale(img, (ball_diam, ball_diam))
 
-
-            offset = Vec2d(*rescaled_img.get_size()) / 2
-            p = p - offset
+            p = self.center_offset(rescaled_img, p)
             #print(f"Pip pos: {p}")
-            self._screen.blit(rescaled_img, (round(p.x), round(p.y)))
+            self._screen.blit(rescaled_img, self.vec_to_tuple(p))
 
     def draw_static_lines(self):
         """
@@ -169,13 +187,14 @@ class DefaultView(View):
 
             pv1 = body.position + line.a.rotated(body.angle)
             pv2 = body.position + line.b.rotated(body.angle)
-            p1 = round(pv1.x), round(flipy(pv1.y))
-            p2 = round(pv2.x), round(flipy(pv2.y))
+            p1 = round(pv1.x), round(pv1.y)
+            p2 = round(pv2.x), round(pv2.y)
             pygame.draw.lines(self._screen, pygame.Color("lightgray"), False, [p1, p2], 2)
 
     def draw_bonsai(self):
         """
-        
+        Determines the stage of the game based on the score and blits the
+        appropriate stage of the bonsai tree to _screen.
         """
         scores = self._board.get_scores()
         if 0 in scores:
@@ -185,13 +204,14 @@ class DefaultView(View):
         else:
             stage = 3
         
-        rescaled_img = pygame.transform.scale(self._bonsai_images[stage], (528, 672))
+        rescaled_img = self.rescale(self._bonsai_images[stage], (528, 672))
         self._screen.blit(rescaled_img, (240,0))
 
     def draw_pot(self):
         """
+        Draws the front of the bonsai pot to _screen.
         """
-        rescaled_img = pygame.transform.scale(self._bonsai_images[0], (528, 672))
+        rescaled_img = self.rescale(self._bonsai_images[0], (528, 672))
         self._screen.blit(rescaled_img, (240,0))
 
     def draw_objects(self):
@@ -201,6 +221,8 @@ class DefaultView(View):
         """
         self.draw_bonsai()
         self.draw_balls()
+
+        # Called after draw_balls to make it look like balls are going into pot
         self.draw_pot()
         self.draw_pips()
         self.draw_next_ball()

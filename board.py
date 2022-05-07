@@ -139,7 +139,7 @@ class Board():
 
     def next_ball(self):
         """
-        
+        Returns the int type of the next ball to be generated.
         """
         next_ball = self.current_ball_type + 1
         if next_ball > 2:
@@ -148,6 +148,7 @@ class Board():
 
     def get_scores(self):
         """
+        returns the list of scores for use outside this class.
         """
         return self._scores
 
