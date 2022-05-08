@@ -37,13 +37,13 @@ Note: In case the orb gets stuck or you want to test out a different stage of th
 
 ### Jeremy Wenger
 
-Jeremy Bio
+Jeremy is a second year at Olin College majoring in robotics. He was responsible for all of the sound effects, audio code, and unit testing for the game.
 
 [Profile Photo of Jeremy](photo_path)
 
 ### Andrew DeCandia
 
-Andrew Bio
+Andrew is a second year at Olin College majoring in sustainability and computing. He was responsible for all of the artwork and visualization code for the game.
 
 [Profile Photo of Andrew](photo_path)
 
