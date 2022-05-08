@@ -49,7 +49,9 @@ Andrew Bio
 
 ### Grant Goodall
 
-Grant Bio
+Grant is a second year at Olin College majoring in mechanical engineering. He was responsible for a majority of physics backend for this game.
+
+His GitHub can be found at: https://github.com/GrantGoodall
 
 [Profile Photo of Grant](photo_path)
 
