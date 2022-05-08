@@ -60,7 +60,7 @@ def run(game, game_view, game_controller, stage):
         for _ in range(physics_steps_each_frame):
             game.space.step(timestep)
 
-        # Checks for keyboard events
+        # Checks for keyboard events 
         game_controller.process_events()
         # Check if the ball is in the pot
         game.check_if_scored()

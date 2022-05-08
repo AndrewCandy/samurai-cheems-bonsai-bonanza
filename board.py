@@ -125,7 +125,7 @@ class Board():
         self.space.add(*self.pips)
         for line in self.tree_lines:
             line.elasticity = 0.5
-            line.friction = 0.9
+            line.friction = 0.5
         self.space.add(*self.tree_lines)
         for line in self.pot_lines:
             line.elasticity = 0.5

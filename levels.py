@@ -30,39 +30,87 @@ class LevelSetup():
         self.pips=[]
         self.tree_lines=[]
         self.pot_lines=[]
+        center = (240+768)/2
+        bottom = 672
         if level == 1:
             if stage == 1:
-                for row in range(6):
-                    for col in range(8):
-                        self.pips.append([240+20+col*70+35*(row % 2),\
-                            row*70+100])
+
+                for pip in range(4):
+                    self.pips.append([center-250+pip*50, pip*40+50])
+                    self.pips.append([center+250-pip*50, pip*40+50])
+                
+                for pip in range(5):
+                    self.pips.append([center+pip*25, pip*15+250])
+                    self.pips.append([center-pip*25, pip*15+250])
+
+                for pip in range(3):
+                    self.pips.append([center-225+pip*40, pip*50+325])
+                    self.pips.append([center+225-pip*40, pip*50+325])
+
                 self.tree_lines = []
-                self.pot_lines = [(((240+768)/2-100, 672 - 10),\
-                     ((240+768)/2+100, 672 - 10)),\
-                    (((240+768)/2-100, 672 - 10), ((240+768)/2-150, 672 - 60)),\
-                    (((240+768)/2+100, 672 - 10), ((240+768)/2+150, 672 - 60))]
+                self.pot_lines = [((center-100, bottom - 50),\
+                     (center+100, bottom - 50)),\
+                    ((center-100, bottom - 50), (center-150, bottom - 160)),\
+                    ((center+100, bottom - 50), (center+150, bottom - 160))]
 
             if stage == 2:
-                for row in range(4):
-                    for col in range(8):
-                        self.pips.append((240+20+col*70+35*(row % 2)\
-                            ,row*120+100))
-                self.tree_lines = []
-                self.pot_lines = [(((240+768)/2-100, 672 - 10),\
-                     ((240+768)/2+100, 672 - 10)),\
-                    (((240+768)/2-100, 672 - 10), ((240+768)/2-150, 672 - 60)),\
-                    (((240+768)/2+100, 672 - 10), ((240+768)/2+150, 672 - 60))]
+                for row in range(3):
+                    for col in range(4):
+                        base_x = center-200+col*135 + 67*(row % 2)
+                        base_y = row*110+60
+                        scale = 10
+                        self.pips.append((base_x,base_y-2.5*scale))
+                        self.pips.append((base_x+2*scale,base_y-scale))
+                        self.pips.append((base_x-2*scale,base_y-scale))
+                        self.pips.append((base_x-scale,base_y+scale))
+                        self.pips.append((base_x+scale,base_y+scale))
+
+
+                self.tree_lines = [((center-130, bottom - 320),\
+                    (center-180, bottom - 300)),\
+                    ((center-130, bottom - 320), (center-50, bottom - 310)),\
+                    ((center+130, bottom - 290), (center+50, bottom - 280)),\
+                    ((center+130, bottom - 290), (center+170, bottom - 270)),]
+                self.pot_lines = [((center-100, bottom - 50),\
+                     (center+100, bottom - 50)),\
+                    ((center-100, bottom - 50), (center-150, bottom - 160)),\
+                    ((center+100, bottom - 50), (center+150, bottom - 160))]
 
             if stage == 3:
-                for row in range(6):
-                    for col in range(8):
-                        self.pips.append([240+20+col*70+35*(row % 2),\
-                            row*70+100])
-                self.tree_lines = []
-                self.pot_lines = [(((240+768)/2-100, 672 - 10),\
-                     ((240+768)/2+100, 672 - 10)),\
-                    (((240+768)/2-100, 672 - 10), ((240+768)/2-150, 672 - 60)),\
-                    (((240+768)/2+100, 672 - 10), ((240+768)/2+150, 672 - 60))]
+                self.pips.append((center+252,350))
+                self.pips.append((center-252,340))
+                star_locations = [(0,420),(200,60),(-170,160)]
+                for loc in star_locations:
+                    scale = 20
+                    self.pips.append((center+loc[0],loc[1]-2.5*scale))
+                    self.pips.append((center+loc[0]+2*scale,loc[1]-scale))
+                    self.pips.append((center+loc[0]-2*scale,loc[1]-scale))
+                    self.pips.append((center+loc[0]-scale,loc[1]+scale))
+                    self.pips.append((center+loc[0]+scale,loc[1]+scale))
+                    scale = -12
+                    self.pips.append((center+loc[0],loc[1]-20-2.5*scale))
+                    self.pips.append((center+loc[0]+2*scale,loc[1]-20-scale))
+                    self.pips.append((center+loc[0]-2*scale,loc[1]-20-scale))
+                    self.pips.append((center+loc[0]-scale,loc[1]-20+scale))
+                    self.pips.append((center+loc[0]+scale,loc[1]-20+scale))
+
+                self.tree_lines = [((center-110, bottom - 290),\
+                    (center-220, bottom - 240)),\
+                    ((center-110, bottom - 290), (center-80, bottom - 285)),\
+                    ((center+80, bottom - 255), (center+170, bottom - 280)),\
+                    ((center+170, bottom - 280), (center+210, bottom - 265)),\
+                    ((center-200, bottom - 400), (center-153, bottom - 420)),\
+                    ((center-153, bottom - 420), (center-60, bottom - 390)),\
+                    ((center+80, bottom - 350), (center+175, bottom - 395)),\
+                    ((center+175, bottom - 395), (center+215, bottom - 380)),\
+                    
+                    ((center-60, bottom - 470), (center+30, bottom - 500)),\
+                    ((center+30, bottom - 500), (center+112, bottom - 490)),\
+                    ((center+112, bottom - 490), (center+155, bottom - 440)),]
+                self.pot_lines = [((center-100, bottom - 50),\
+                     (center+100, bottom - 50)),\
+                    ((center-100, bottom - 50), (center-150, bottom - 160)),\
+                    ((center+100, bottom - 50), (center+150, bottom - 160))]
 
         layout = [self.pips,self.tree_lines, self.pot_lines]
         return layout
