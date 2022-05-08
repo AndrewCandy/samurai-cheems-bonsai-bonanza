@@ -15,6 +15,31 @@ class Board():
     """
     Create a class to represent the game board
     for Samurai Cheems: Bonsai Bonanza.
+
+    Public Attributes:
+        pot_lines: A list of all pymunk line objects that make up the bonsai
+        pot.
+        tree_lines: A list of all pymunk line objects that make up the bonsai
+        tree leaf walls currently in the physics space.
+        wall_lines: A list of all pymunk line objects that make up the border
+        of the physics space.
+        pips: A list of pymunk static circle objects for all pegs currently in
+        the physics space.
+        setup: An instance of the LevelSetup class that contains position
+        information for game elements in each level and stage.
+        ball_radius: An int representing the radius of the ball.
+        balls: A list containing all dynamic circle objects currently in the
+        physics space.
+        current_ball_type: An int representing which type of ball is currently
+        in use for scoring purposes.
+
+    Private Attributes:
+        _space: The 2d pymunk physics environment where all our physics objects
+        exist and our simulation occurs.
+        _scores: The total score of each ball type. Saved as a list of three
+        integers.
+
+
     """
 
     def __init__(self):
@@ -22,34 +47,28 @@ class Board():
         self.tree_lines = []
         self.wall_lines = []
         self.pips = []
-        self.pot_x_1 = 0
-        self.pot_x_2 = 0
 
         self.setup = LevelSetup()
 
         # Space
         self._space = pymunk.Space()
+        # Set gravity in space
         self._space.gravity = (0.0, 900.0)
-
-        # Physics
-        # Time step
-        self.dt = 1.0 / 60.0
-        # Number of physics steps per screen frame
-        self.physics_steps_per_frame = 1
 
         # pygame
         pygame.init()
-        #self._screen = pygame.display.set_mode((600, 600))
-        self._clock = pygame.time.Clock()
+
+        # Ball info
+        self.ball_radius = 11
 
         # Balls that exist in the world
         self.balls = []
 
-        # Ball types:
-        self.ball_radius = 11
+        # Ball type:
         # 0 = water, 1 = earth, 2 = sun
         self.current_ball_type = 0
 
+        # Scoring
         self._scores = [0,0,0]
 
     def draw_background(self):
