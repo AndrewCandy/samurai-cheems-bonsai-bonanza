@@ -76,7 +76,8 @@ class DefaultView(View):
         # SpriteSheet setup
         ball_sprite_sheet = SpriteSheet("sprites/balls_sprite_sheet.png")
         pip_sprite_sheet = SpriteSheet("sprites/peg_sprite_sheet.png")
-        bonsai_sprite_sheet = SpriteSheet("sprites/cherry_bonsai_sprite_sheet.png")
+        bonsai_sprite_sheet = SpriteSheet\
+            ("sprites/cherry_bonsai_sprite_sheet.png")
 
         # Single images
         self._pip_img = pip_sprite_sheet.image_at((8,0,8,8), -1)
@@ -84,7 +85,8 @@ class DefaultView(View):
 
         # Image lists
         self._ball_images = ball_sprite_sheet.load_strip((0,0,11,11), 3, -1)
-        self._bonsai_images = bonsai_sprite_sheet.load_strip((0,0,264,336), 5, -1)
+        self._bonsai_images = bonsai_sprite_sheet.load_strip\
+            ((0,0,264,336), 5, -1)
 
     def get_static_lines(self):
         """
@@ -168,7 +170,8 @@ class DefaultView(View):
             pv2 = body.position + line.b.rotated(body.angle)
             pos1 = round(pv1.x), round(pv1.y)
             pos2 = round(pv2.x), round(pv2.y)
-            pygame.draw.lines(self._screen, pygame.Color("lightgray"), False, [pos1, pos2], 2)
+            pygame.draw.lines(self._screen, pygame.Color("lightgray")\
+                , False, [pos1, pos2], 2)
 
     def draw_bonsai(self):
         """
@@ -206,9 +209,11 @@ class DefaultView(View):
             score = scores[i[0]]
             img = rescale(self._ball_images[i[0]], (36, 36))
             if score > 2:
-                self._screen.blit(img, (horz_offset + (scoring_offset * 2), vert_offset))
+                self._screen.blit(img, (horz_offset + (scoring_offset * 2)\
+                    , vert_offset))
             if score > 1:
-                self._screen.blit(img, (horz_offset + scoring_offset, vert_offset))
+                self._screen.blit(img, (horz_offset + scoring_offset,\
+                     vert_offset))
             if score > 0:
                 self._screen.blit(img, (horz_offset, vert_offset))
 
@@ -234,7 +239,8 @@ class DefaultView(View):
         self.draw_next_ball()
         self.draw_score()
         # self.draw_static_lines()
-        self._window.blit(rescale(self._screen, self._window.get_rect().size), (0, 0))
+        self._window.blit(rescale(self._screen, self._window.get_rect().size)\
+            , (0, 0))
         pygame.display.update()
 
 
