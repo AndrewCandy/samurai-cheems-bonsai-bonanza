@@ -39,12 +39,15 @@ class View(ABC):
         self._ball_sprite_sheet = SpriteSheet("sprites/balls_sprite_sheet.png")
         self._pip_sprite_sheet = SpriteSheet("sprites/peg_sprite_sheet.png")
         self._bonsai_sprite_sheet = SpriteSheet("sprites/cherry_bonsai_sprite_sheet.png")
+        
+        # self._cheems
 
-        self._ball_images = self._ball_sprite_sheet.load_strip((0,0,9,9), 3, -1)
+
+        self._ball_images = self._ball_sprite_sheet.load_strip((0,0,11,11), 3, -1)
         self._pip_img = self._pip_sprite_sheet.image_at((8,0,8,8), -1)
-        self._bonsai_images = self._bonsai_sprite_sheet.load_strip((0,0,264,336), 4, -1)
+        self._bonsai_images = self._bonsai_sprite_sheet.load_strip((0,0,264,336), 5, -1)
 
-        self._background = pygame.image.load("sprites/temp_background.png")
+        self._background = pygame.image.load("sprites/main_background.png")
 
     def clear_screen(self):
         """
@@ -214,6 +217,22 @@ class DefaultView(View):
         rescaled_img = self.rescale(self._bonsai_images[0], (528, 672))
         self._screen.blit(rescaled_img, (240,0))
 
+    def draw_score(self):
+        scores = self._board.get_scores()
+        horz_offset = 103
+        scoring_offset = 48
+        for i in range(len(scores)):
+            vert_offset = 151
+            vert_offset = vert_offset + (scoring_offset * i)
+            score = scores[i]
+            img = self.rescale(self._ball_images[i], (36, 36))
+            if score > 2:
+                self._screen.blit(img, (horz_offset + (scoring_offset * 2), vert_offset))
+            if score > 1:
+                self._screen.blit(img, (horz_offset + scoring_offset, vert_offset))
+            if score > 0:
+                self._screen.blit(img, (horz_offset, vert_offset))
+
     def draw_objects(self):
         """
         Draw all objects to pygame screen. Update window with screen.
@@ -226,6 +245,7 @@ class DefaultView(View):
         self.draw_pot()
         self.draw_pips()
         self.draw_next_ball()
+        self.draw_score()
         # self.draw_static_lines()
         self._window.blit(pygame.transform.scale(self._screen, self._window.get_rect().size), (0, 0))
         pygame.display.update()

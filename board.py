@@ -51,7 +51,7 @@ class Board():
         self.balls = []
 
         # Ball types:
-        self.ball_radius = 9
+        self.ball_radius = 11
         # 0 = water, 1 = earth, 2 = sun
         self.current_ball_type = 0
 
