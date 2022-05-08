@@ -2,17 +2,12 @@
 Creates the model behind the Samurai Cheems: Bonsai Bananza game
 """
 
-# Python imports
-from typing import List
-
 # Library imports
 import pygame
 import sound
 
 # pymunk imports
 import pymunk
-import pymunk.pygame_util
-from pymunk import Vec2d
 from levels import LevelSetup
 
 
