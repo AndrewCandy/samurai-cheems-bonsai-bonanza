@@ -1,0 +1,10 @@
+[FORMAT]
+
+max-line-length=80
+
+[BASIC]
+
+const-naming-style=snake_case
+
+[TYPECHECK]
+ignored-classes= pygame
