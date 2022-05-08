@@ -238,7 +238,7 @@ class DefaultView(View):
         self.draw_pips()
         self.draw_next_ball()
         self.draw_score()
-        self.draw_static_lines()
+        #self.draw_static_lines()
         self._window.blit(rescale(self._screen, self._window.get_rect().size)\
             , (0, 0))
         pygame.display.update()
