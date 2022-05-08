@@ -8,3 +8,6 @@ const-naming-style=snake_case
 
 [TYPECHECK]
 ignored-classes= pygame
+
+[MESSAGES CONTROL]
+disable=unused-argument

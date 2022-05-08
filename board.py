@@ -4,10 +4,9 @@ Creates the model behind the Samurai Cheems: Bonsai Bananza game
 
 # Library imports
 import pygame
-import sound
-
-# pymunk imports
 import pymunk
+
+import sound
 from levels import LevelSetup
 
 
@@ -32,13 +31,12 @@ class Board():
         physics space.
         current_ball_type: An int representing which type of ball is currently
         in use for scoring purposes.
+        space: The 2d pymunk physics environment where all our physics objects
+        exist and our simulation occurs.
 
     Private Attributes:
-        _space: The 2d pymunk physics environment where all our physics objects
-        exist and our simulation occurs.
         _scores: The total score of each ball type. Saved as a list of three
         integers.
-
 
     """
 
@@ -51,9 +49,9 @@ class Board():
         self.setup = LevelSetup()
 
         # Space
-        self._space = pymunk.Space()
+        self.space = pymunk.Space()
         # Set gravity in space
-        self._space.gravity = (0.0, 900.0)
+        self.space.gravity = (0.0, 900.0)
 
         # pygame
         pygame.init()
@@ -76,7 +74,7 @@ class Board():
         Creates the walls around the game board
         """
         # Makes the physics body static
-        static_body = self._space.static_body
+        static_body = self.space.static_body
         # Creates the locations of the wall lines
         self.wall_lines = [
             # Left Line
@@ -89,7 +87,7 @@ class Board():
             line.elasticity = 0.5
             line.friction = 0.9
         # Adds the wall lines to the space.
-        self._space.add(*self.wall_lines)
+        self.space.add(*self.wall_lines)
 
     def draw_level(self, level_num, level_state):
         """
@@ -98,7 +96,7 @@ class Board():
         # Clears the previous level
         self.empty_level()
         # Sets the physics type for the level objects
-        static_body = self._space.static_body
+        static_body = self.space.static_body
 
         pip_radius = 8
 
@@ -124,31 +122,31 @@ class Board():
         for pip in self.pips:
             pip.elasticity = 0.95
             pip.friction = 0.9
-        self._space.add(*self.pips)
+        self.space.add(*self.pips)
         for line in self.tree_lines:
             line.elasticity = 0.5
             line.friction = 0.9
-        self._space.add(*self.tree_lines)
+        self.space.add(*self.tree_lines)
         for line in self.pot_lines:
             line.elasticity = 0.5
             line.friction = 0.9
         self.pot_lines[0].collision_type = 2
-        self._space.add(*self.pot_lines)
+        self.space.add(*self.pot_lines)
 
     def empty_level(self):
         """
         Clears the level of any previous pegs, pot lines, or tree lines
         """
         # Remove pips
-        self._space.remove(*self.pips)
+        self.space.remove(*self.pips)
         self.pips = []
 
         # Remove the bonsai sprout
-        self._space.remove(*self.tree_lines)
+        self.space.remove(*self.tree_lines)
         self.tree_lines = []
 
         # Remove the pot
-        self._space.remove(*self.pot_lines)
+        self.space.remove(*self.pot_lines)
         self.pot_lines = []
 
     def next_ball(self):
@@ -173,22 +171,24 @@ class Board():
         """
         # Remove balls that fall into bonsai pot and increase score
 
-        score_collision = self._space.add_collision_handler(1, 2)
+        score_collision = self.space.add_collision_handler(1, 2)
         if len(self.balls) > 0:
             ball = self.balls[0]
             score_collision.begin = self.scores
-            
 
         # Remove balls that fall out of bounds
         balls_to_remove = [
             ball for ball in self.balls if ball.body.position.y > 672-10]
         for ball in balls_to_remove:
-            self._space.remove(ball, ball.body)
+            self.space.remove(ball, ball.body)
             self.balls.remove(ball)
             self.current_ball_type = self.next_ball()
 
     def scores(self, arbiter, space, data):
-        self._space.remove(*self.balls)
+        """
+        Increases score and removes a scored ball from the board
+        """
+        self.space.remove(*self.balls)
         self.balls = []
         self._scores[self.current_ball_type] += 1
         self.current_ball_type = self.next_ball()

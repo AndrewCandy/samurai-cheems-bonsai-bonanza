@@ -11,7 +11,6 @@ import pygame
 import pymunk
 import pymunk.pygame_util
 
-from board import Board
 
 class Controller(ABC):
     """
@@ -37,7 +36,7 @@ class Controller(ABC):
                 self.running = False
             #Clears level for debugging purposes
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                self._board._space.remove(*self._board.pips)
+                self._board.space.remove(*self._board.pips)
                 self._board.pips = []
             #Launches a new ball when clicked
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
@@ -80,7 +79,8 @@ class MouseController(Controller):
         body.position = _pos
 
         #Finds the distance from the mouse to the launch position when clicked
-        mouse_dist = ((mouse_pos[0] - _pos[0])**2+(mouse_pos[1] - _pos[1])**2) ** 0.5
+        mouse_dist = ((mouse_pos[0] - _pos[0])**2+\
+            (mouse_pos[1] - _pos[1])**2) ** 0.5
 
         #Creates starting speed with some randomness to prevent the exact same
         #launch having the same trajectory
@@ -100,5 +100,5 @@ class MouseController(Controller):
         shape.collision_type = 1
 
         #Adds the ball to the space and to the list of balls
-        self._board._space.add(body,shape)
+        self._board.space.add(body,shape)
         self._board.balls.append(shape)

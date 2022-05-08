@@ -49,16 +49,14 @@ def run(game, game_view, game_controller, stage):
     Runs through the main gameplay loop for each level
     """
     # Parameters for physics engine:
-    physics_steps_per_frame = 1
-    dt = 1.0 / 60.0
+    timestep = 1.0 / 60.0
     clock = pygame.time.Clock()
 
     # Ends this level if the game ends or if the game is closed or the score
     # is high enough
     while game_controller.running and stage in game.get_scores():
         # Progress time forward
-        for x in range(physics_steps_per_frame):
-            game._space.step(dt)
+        game.space.step(timestep)
 
         # Checks for keyboard events
         game_controller.process_events()
