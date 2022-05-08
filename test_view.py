@@ -80,8 +80,8 @@ def test_rescale(image, dimensions):
     This is the basic testing structure for the rescale function
     """
 
-    object = rescale(image, dimensions)
+    objects = rescale(image, dimensions)
 
-    output = (object.get_width(), object.get_height())
+    output = (objects.get_width(), objects.get_height())
 
     assert output == dimensions

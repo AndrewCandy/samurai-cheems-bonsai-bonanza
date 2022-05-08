@@ -38,7 +38,7 @@ class LevelSetup():
                 for pip in range(4):
                     self.pips.append([center-250+pip*50, pip*40+50])
                     self.pips.append([center+250-pip*50, pip*40+50])
-                
+
                 for pip in range(5):
                     self.pips.append([center+pip*25, pip*15+250])
                     self.pips.append([center-pip*25, pip*15+250])
@@ -103,7 +103,7 @@ class LevelSetup():
                     ((center-153, bottom - 420), (center-60, bottom - 390)),\
                     ((center+80, bottom - 350), (center+175, bottom - 395)),\
                     ((center+175, bottom - 395), (center+215, bottom - 380)),\
-                    
+
                     ((center-60, bottom - 470), (center+30, bottom - 500)),\
                     ((center+30, bottom - 500), (center+112, bottom - 490)),\
                     ((center+112, bottom - 490), (center+155, bottom - 440)),]

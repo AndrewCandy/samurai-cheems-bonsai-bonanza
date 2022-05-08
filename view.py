@@ -243,7 +243,6 @@ class DefaultView(View):
             , (0, 0))
         pygame.display.update()
 
-
 def center_offset(image, position):
     """
     Offest the position of an image so it is centered on the input position
