@@ -42,7 +42,7 @@ Jeremy is a second year at Olin College majoring in robotics. He was responsible
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= "/assets/images/decandia.png" height=25% style="float:left;margin:0px 30px">
+<img src= "/samurai-cheems-bonsai-bonanza/docs/assets/images/decandia.png" height=25% style="float:left;margin:0px 30px">
 
 ### Andrew DeCandia
 
@@ -50,7 +50,18 @@ Andrew is a second year at Olin College majoring in sustainability and computing
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= "/assets/images/Goodall.jpg" height=25% style="float:left;margin:0px 30px">
+<div style = "width:60px ; height:60px">
+
+![Grant](/samurai-cheems-bonsai-bonanza/docs/assets/images/decandia.jpg?raw=true "Grant")
+
+<div>
+
+
+<div style = "width:60px ; height:60px">
+
+![Grant](assets/images/decandia.jpg?raw=true "Grant")
+
+<div>
 
 ### Grant Goodall
 
