@@ -34,7 +34,7 @@ Note: In case the orb gets stuck or you want to test out a different stage of th
 
 ## About Us
 
-<img src= images/Jeremy-Photo.jpg width=25% height=25% style="float:left;margin:0px 30px">
+<img src= "images/Jeremy-Photo.jpg" width=25% height=25% style="float:left;margin:0px 30px">
 
 ### Jeremy Wenger
 
@@ -42,7 +42,7 @@ Jeremy is a second year at Olin College majoring in robotics. He was responsible
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= images/decandia.png width=25% height=25% style="float:left;margin:0px 30px">
+<img src= "images/decandia.png" width=25% height=25% style="float:left;margin:0px 30px">
 
 ### Andrew DeCandia
 
@@ -50,7 +50,7 @@ Andrew is a second year at Olin College majoring in sustainability and computing
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= images/Goodall.jpg width=25% height=25% style="float:left;margin:0px 30px">
+<img src= "images/Goodall.jpg" width=25% height=25% style="float:left;margin:0px 30px">
 
 ### Grant Goodall
 
