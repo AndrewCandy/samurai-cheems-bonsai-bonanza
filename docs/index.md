@@ -28,11 +28,13 @@ This assumes that the repository is located in the home file. Getting to the fil
 
 As shown in the short video below, launch the resource orbs by clicking in the direction you want them to go and try to land them in the bonsai pot. Once the bonsai has one of each resource as shown in the left side of the screen, the tree will grow and the level layout will change. Can you grow the tree through all three stages and help out Samurai Cheems in his retirement?
 
-![Gameplay](https://youtu.be/SUQPODOoHQ8)
+[Gameplay](https://youtu.be/SUQPODOoHQ8)
 
 Note: In case the orb gets stuck or you want to test out a different stage of the game, you can press the "space" button to clear the screen of obstacles.
 
 ## About Us
+
+<br>
 
 ![Jeremy](assets/images/Jeremy-Photo.jpg)
 
@@ -40,11 +42,15 @@ Note: In case the orb gets stuck or you want to test out a different stage of th
 
 Jeremy is a second year at Olin College majoring in robotics. He was responsible for all of the sound effects, audio code, and unit testing for the game.
 
+<br>
+
 ![Andrew](assets/images/decandia.png)
 
 ### Andrew DeCandia
 
 Andrew is a second year at Olin College majoring in sustainability and computing. He was responsible for all of the artwork and visualization code for the game.
+
+<br>
 
 ![Grant](assets/images/Goodall.jpg)
 
@@ -52,12 +58,10 @@ Andrew is a second year at Olin College majoring in sustainability and computing
 
 Grant is a second year at Olin College majoring in mechanical engineering. He was responsible for a majority of physics backend for this game.
 
-<br><br><br><br><br><br><br><br><br><br>
-
 ## Sources and References
 
 Many thanks to [Steve Matsumoto](https://github.com/syclops) for teaching the Software Design class that me this project possible, [ehmatthes](https://ehmatthes.github.io/pcc_2e/contact/) for explanations on sprite sheets and visuals, and [Ear Of Corn Progamming](https://www.youtube.com/channel/UC9zhfyMbjLbuZEkV5uxbBNg) for their pymunk tutorials.
 
 ## Full Video
 
-![Full Video](https://youtu.be/REochfnbx3E)
+[Full Video](https://youtu.be/REochfnbx3E)
