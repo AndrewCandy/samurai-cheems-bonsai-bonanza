@@ -45,7 +45,7 @@ Jeremy is a second year at Olin College majoring in robotics. He was responsible
 
 Andrew is a second year at Olin College majoring in sustainability and computing. He was responsible for all of the artwork and visualization code for the game.
 
-[Profile Photo of Andrew]("images/decandia.png")
+[Profile Photo of Andrew](images/decandia.png)
 
 ### Grant Goodall
 
