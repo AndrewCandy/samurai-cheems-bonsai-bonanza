@@ -34,34 +34,19 @@ Note: In case the orb gets stuck or you want to test out a different stage of th
 
 ## About Us
 
-<img src= "{{site.url}}/assets/images/Jeremy-Photo.jpg" height=25% style="float:left;margin:0px 30px">
+![Jeremy](assets/images/Jeremy-Photo.jpg)
 
 ### Jeremy Wenger
 
 Jeremy is a second year at Olin College majoring in robotics. He was responsible for all of the sound effects, audio code, and unit testing for the game.
 
-<br><br><br><br><br><br><br><br><br><br>
-
-<img src= "/samurai-cheems-bonsai-bonanza/docs/assets/images/decandia.png" height=25% style="float:left;margin:0px 30px">
+![Andrew](assets/images/decandia.png)
 
 ### Andrew DeCandia
 
 Andrew is a second year at Olin College majoring in sustainability and computing. He was responsible for all of the artwork and visualization code for the game.
 
-<br><br><br><br><br><br><br><br><br><br>
-
-<div style = "width:60px ; height:60px">
-
-![Grant](/samurai-cheems-bonsai-bonanza/docs/assets/images/decandia.jpg?raw=true "Grant")
-
-<div>
-
-
-<div style = "width:60px ; height:60px">
-
-![Grant](assets/images/decandia.jpg?raw=true "Grant")
-
-<div>
+![Grant](assets/images/Goodall.jpg)
 
 ### Grant Goodall
 
