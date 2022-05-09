@@ -34,7 +34,7 @@ Note: In case the orb gets stuck or you want to test out a different stage of th
 
 ## About Us
 
-<img src= "{{site.url}}/docs/assets/images/Jeremy-Photo.jpg" height=25% style="float:left;margin:0px 30px">
+<img src= "{{site.url}}docs/assets/images/Jeremy-Photo.jpg" height=25% style="float:left;margin:0px 30px">
 
 ### Jeremy Wenger
 
