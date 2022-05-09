@@ -42,7 +42,7 @@ Jeremy is a second year at Olin College majoring in robotics. He was responsible
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= "/least-github-pages/assets/images/decandia.png" height=25% style="float:left;margin:0px 30px">
+<img src= "/assets/images/decandia.png" height=25% style="float:left;margin:0px 30px">
 
 ### Andrew DeCandia
 
@@ -50,7 +50,7 @@ Andrew is a second year at Olin College majoring in sustainability and computing
 
 <br><br><br><br><br><br><br><br><br><br>
 
-<img src= "/least-github-pages/assets/images/Goodall.jpg" height=25% style="float:left;margin:0px 30px">
+<img src= "/assets/images/Goodall.jpg" height=25% style="float:left;margin:0px 30px">
 
 ### Grant Goodall
 
