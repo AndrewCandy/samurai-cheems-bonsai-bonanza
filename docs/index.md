@@ -1,5 +1,5 @@
 # Samurai Cheems: Bonsai Bonanza
-## Jeremy Wenger, Andrew Decandia, and Grant Goodall's SoftDes Spring 2021 Final Project
+#### Jeremy Wenger, Andrew Decandia, and Grant Goodall's SoftDes Spring 2022 Final Project
 ## Backstory
 
 With this project, we created a sequel to the game [Cheems Game](https://github.com/olincollege/cheems-game) (Which was under construction as we developed this game). Focusing on the titular Samurai Cheems, as he enters retirement and focus on taking care of his bonsai tree. Samurai Cheems needs to get water, soil, and light to his bonsai tree through launching orbs of each resource through a pachinko-esque board avoiding obstacles and the growing branches of the bonsai.
@@ -28,33 +28,40 @@ This assumes that the repository is located in the home file. Getting to the fil
 
 As shown in the short video below, launch the resource orbs by clicking in the direction you want them to go and try to land them in the bonsai pot. Once the bonsai has one of each resource as shown in the left side of the screen, the tree will grow and the level layout will change. Can you grow the tree through all three stages and help out Samurai Cheems in his retirement?
 
-[![Blinking LEDs](http://img.youtube.com/vi/XAMVzS13HY0/0.jpg)](http://www.youtube.com/watch?v=XAMVzS13HY0 "Blinking LEDs")
-
+![Gameplay](https://youtu.be/SUQPODOoHQ8)
 
 Note: In case the orb gets stuck or you want to test out a different stage of the game, you can press the "space" button to clear the screen of obstacles.
 
 ## About Us
 
+<img src= images/Jeremy-Photo.jpg width=25% height=25% style="float:left;margin:0px 30px">
+
 ### Jeremy Wenger
 
 Jeremy is a second year at Olin College majoring in robotics. He was responsible for all of the sound effects, audio code, and unit testing for the game.
 
-[Profile Photo of Jeremy](photo_path)
+<br><br><br><br><br><br><br><br><br><br>
+
+<img src= images/decandia.png width=25% height=25% style="float:left;margin:0px 30px">
 
 ### Andrew DeCandia
 
 Andrew is a second year at Olin College majoring in sustainability and computing. He was responsible for all of the artwork and visualization code for the game.
 
-[Profile Photo of Andrew](images/decandia.png)
+<br><br><br><br><br><br><br><br><br><br>
+
+<img src= images/Goodall.jpg width=25% height=25% style="float:left;margin:0px 30px">
 
 ### Grant Goodall
 
 Grant is a second year at Olin College majoring in mechanical engineering. He was responsible for a majority of physics backend for this game.
 
-His GitHub can be found at: https://github.com/GrantGoodall
-
-[Profile Photo of Grant](photo_path)
+<br><br><br><br><br><br><br><br><br><br>
 
 ## Sources and References
 
 Many thanks to [Steve Matsumoto](https://github.com/syclops) for teaching the Software Design class that me this project possible, [ehmatthes](https://ehmatthes.github.io/pcc_2e/contact/) for explanations on sprite sheets and visuals, and [Ear Of Corn Progamming](https://www.youtube.com/channel/UC9zhfyMbjLbuZEkV5uxbBNg) for their pymunk tutorials.
+
+## Full Video
+
+![Full Video](https://youtu.be/REochfnbx3E)
