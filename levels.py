@@ -112,5 +112,39 @@ class LevelSetup():
                     ((center-100, bottom - 50), (center-150, bottom - 160)),\
                     ((center+100, bottom - 50), (center+150, bottom - 160))]
 
+            if stage == 4:
+                #You Win
+                for pip in range(3):
+                    self.pips.append([center+135-15*pip, 195])
+                    self.pips.append([center+15-15*pip, 195])
+                    self.pips.append([center+15-15*pip, 105])
+                for pip in range(4):
+                    self.pips.append([center-120+pip*15, -15*pip+150])
+                    self.pips.append([center-120-pip*15, -15*pip+150])
+                    self.pips.append([center-120, -15*pip+195])
+                for pip in range(5):
+                    self.pips.append([center-30+15*pip,395])
+                    self.pips.append([center-30+15*pip,320])
+
+                    self.pips.append([center+30, 120+15*pip])
+                    self.pips.append([center-30, 120+15*pip])
+                for pip in range(6):
+                    self.pips.append([center-150+5*pip,-15*pip+395])
+                    self.pips.append([center-150-5*pip,-15*pip+395])
+                    self.pips.append([center-100+5*pip,-15*pip+395])
+                    self.pips.append([center-100-5*pip,-15*pip+395])
+
+                    self.pips.append([center+150, 105+15*pip])
+                    self.pips.append([center+90, 105+15*pip])
+
+                    self.pips.append([center,-15*pip+395])
+
+                    self.pips.append([center+150,-15*pip+395])
+                    self.pips.append([center+90,-15*pip+395])
+                    self.pips.append([center+150-12*pip,-15*pip+395])
+
+
+                self.pot_lines =[((center-250, bottom - 50),\
+                     (center+250, bottom - 50))]
         layout = [self.pips,self.tree_lines, self.pot_lines]
         return layout

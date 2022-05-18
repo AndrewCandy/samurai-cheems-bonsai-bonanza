@@ -38,12 +38,21 @@ class Controller(ABC):
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self._board.space.remove(*self._board.pips)
                 self._board.pips = []
+                self._board.space.remove(*self._board.tree_lines)
+                self._board.tree_lines = []
             #Launches a new ball when clicked
             elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 mouse_xy = event.pos[0], event.pos[1]
                 #Makes sure only one ball is on the screen at a time.
                 if len(self._board.balls) == 0:
                     self.create_ball(mouse_xy)
+            elif event.type == pygame.KEYDOWN and event.key == pygame.K_BACKSPACE:
+                balls_to_remove = [ball for ball in self._board.balls]
+                for ball in balls_to_remove:
+                    self._board.space.remove(ball, ball.body)
+                    self._board.balls.remove(ball)
+                    self._board.current_ball_type = self._board.next_ball()
+
 
 
     @abstractmethod

@@ -31,7 +31,7 @@ def main():
     # Uses the number of levels and number of stages per level to
     # Iterate through each stage of the game
     num_levels = 1
-    num_stages = 3
+    num_stages = 4
 
     # Iterates for each level and stage
     for level in range(num_levels):
